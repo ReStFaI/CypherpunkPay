@@ -29,6 +29,9 @@
                             <button class="button is-link is-outlined" style="width: 100%">{{ view.formatted_currency_amount(amount, donations_fiat_currency) }}</button>
                         </form>
                     {% endfor %}
+                    <form action="{{ view.request.route_url('post_charge') }}" method="post" class="level-item">
+                        <button class="button is-dark is-outlined" style="width: 100%" title="Donate a single UTXO to avoid change and enhance privacy! UTXO stands for Unspent Transaction Output. Use coin-control feature in your wallet to pick a UTXO to spend.">single UTXO</button>
+                    </form>
                 </div>
             </div>
 

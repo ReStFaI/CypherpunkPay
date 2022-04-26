@@ -31,6 +31,13 @@ from pprint import pprint
 from pathlib import Path
 
 
+def utc_from_str(s: str) -> datetime.datetime:
+    if '+' in s:
+        raise ValueError('Please do NOT pass the timezone. This method enforces UTC.')
+    s += '+00:00'  # enforce UTC
+    return datetime.datetime.fromisoformat(s)
+
+
 def utc_now():
     return datetime.datetime.now(pytz.utc)
 

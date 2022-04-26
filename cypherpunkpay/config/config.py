@@ -114,6 +114,24 @@ class Config(object):
         else:
             return self._dict.get('xmr_stagenet_node_enabled', 'false') == 'true'
 
+    def xmr_node_rpc_url(self) -> str:
+        if self.xmr_mainnet():
+            return self._dict.get('xmr_mainnet_node_rpc_url', 'http://127.0.0.1:18081')
+        else:
+            return self._dict.get('xmr_stagenet_node_rpc_url', 'http://127.0.0.1:38081')
+
+    def xmr_node_rpc_user(self) -> str:
+        if self.xmr_mainnet():
+            return self._dict.get('xmr_mainnet_node_rpc_user')
+        else:
+            return self._dict.get('xmr_stagenet_node_rpc_user')
+
+    def xmr_node_rpc_password(self) -> str:
+        if self.xmr_mainnet():
+            return self._dict.get('xmr_mainnet_node_rpc_password')
+        else:
+            return self._dict.get('xmr_stagenet_node_rpc_password')
+
     def btc_network(self):
         return self._dict.get('btc_network', 'testnet')
 
@@ -139,7 +157,8 @@ class Config(object):
     def xmr_stagenet(self):
         return self.xmr_network() == 'stagenet'
 
-    def supported_coins(self) -> List[str]:
+    @staticmethod
+    def supported_coins() -> List[str]:
         return ['btc', 'xmr']
 
     def supported_explorers(self, coin: str) -> List[BlockExplorer]:
